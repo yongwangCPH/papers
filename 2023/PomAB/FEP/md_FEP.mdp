@@ -1,0 +1,56 @@
+integrator              = md
+dt                      = 0.002
+nsteps                  = 2000000 ; 4ns
+nstxout                 = 0
+nstxout-compressed      = 500000
+nstvout                 = 0
+nstfout                 = 0
+nstcalcenergy           = 100
+nstenergy               = 0
+nstlog                  = 5000
+;
+cutoff-scheme           = Verlet
+nstlist                 = 20
+rlist                   = 1.2
+vdwtype                 = Cut-off
+vdw-modifier            = Force-switch
+rvdw_switch             = 1.0
+rvdw                    = 1.2
+coulombtype             = PME
+rcoulomb                = 1.2
+;
+tcoupl                  = v-rescale
+tc_grps                 = system
+tau_t                   = 1.0
+ref_t                   = 310
+;
+pcoupl                  = Parrinello-Rahman
+pcoupltype              = semiisotropic
+tau_p                   = 5.0
+compressibility         = 4.5e-5  4.5e-5
+ref_p                   = 1.0     1.0
+;
+constraints             = h-bonds
+constraint_algorithm    = LINCS
+continuation            = yes
+;
+nstcomm                 = 100
+comm_mode               = linear
+comm_grps               = system
+
+refcoord_scaling=all
+
+;==============================
+; FEP
+free_energy              = yes
+init_lambda_state        = LAMBDA
+delta_lambda             = 0
+calc_lambda_neighbors    = 1
+vdw_lambdas              = 0 0.05 0.10 0.20 0.30 0.40 0.50 0.60 0.70 0.80 0.90 0.95 1.00
+
+sc-alpha                 = 0.5
+sc-coul                  = yes
+sc-power                 = 1
+sc-sigma                 = 0.3
+nstdhdl                  = 500
+couple-intramol          = yes

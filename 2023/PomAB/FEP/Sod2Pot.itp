@@ -1,0 +1,7 @@
+[ moleculetype ]
+; name	nrexcl
+N2K	     1
+
+[ atoms ]
+; nr	type	resnr	residu	atom	cgnr	charge	mass     
+   1     SOD    1       N2K     SOD      1      1.00    22.9898   POT  1.00    39.0983
