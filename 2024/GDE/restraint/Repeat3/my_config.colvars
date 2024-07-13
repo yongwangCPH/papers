@@ -1,0 +1,16 @@
+colvar {
+  name dist
+  distance {
+    group1 { atomNumbersRange 23129-23236  }
+    group2 { atomNumbers 2219 5337 6219 6638 7763 }
+  }
+}
+
+harmonicWalls {
+  name  mywalls
+  colvars    dist
+  lowerWalls  0.4
+  upperWalls  0.6
+  lowerWallConstant  0.000000001
+  upperWallConstant 10.0
+}
