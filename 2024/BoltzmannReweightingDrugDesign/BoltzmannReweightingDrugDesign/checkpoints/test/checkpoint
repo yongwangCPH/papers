@@ -1,0 +1,2 @@
+model_checkpoint_path: "E:\\ORGAN-master\\ORGAN-master\\checkpoints/test\\test_2.ckpt"
+all_model_checkpoint_paths: "E:\\ORGAN-master\\ORGAN-master\\checkpoints/test\\test_2.ckpt"
