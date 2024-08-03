@@ -1,0 +1,19 @@
+;; em.mdp
+
+; Run setup
+integrator               = steep      
+emtol                    = 500
+emstep                  = 0.001
+nsteps                   = 2000
+nstxout                  = 100
+
+; Electrostatics and vdw
+cutoff-scheme           = Verlet
+nstlist                 = 20
+rlist                   = 1.2
+vdwtype                 = Cut-off
+vdw-modifier            = Force-switch
+rvdw_switch             = 1.0
+rvdw                    = 1.2
+coulombtype             = PME
+rcoulomb                = 1.2

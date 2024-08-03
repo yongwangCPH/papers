@@ -1,0 +1,51 @@
+;; nvt.mdp
+; Run setup
+integrator               = md
+dt                       = 0.002
+nsteps                   = 500000  ;1ns
+
+; Output control
+nstxout                  = 0
+nstvout                  = 0
+nstfout                  = 0
+nstlog                   = 250
+nstenergy                = 500
+nstxout-compressed       = 500
+compressed-x-grps        = System
+compressed-x-precision   = 1000
+
+; Bonds
+constraints              = h-bonds
+constraint-algorithm     = LINCS
+
+; Neighbor searching
+cutoff-scheme            = Verlet
+nstlist                  = 20
+
+; Electrostatics and vdw
+rlist                   = 1.2
+vdwtype                 = Cut-off
+vdw-modifier            = Force-switch
+rvdw_switch             = 1.0
+rvdw                    = 1.2
+coulombtype             = PME
+rcoulomb                = 1.2
+
+; T coupling
+tcoupl                   = v-rescale
+tc-grps                  = Protein Non-Protein
+tau-t                    = 0.1 0.1
+ref-t                    = 310 310
+nsttcouple               = 10
+
+; P coupling
+pcoupl                   = Parrinello-Rahman
+pcoupltype               = isotropic
+tau-p                    = 2.0
+ref-p                    = 1.0
+compressibility          = 4.5e-5
+
+; Velocity generation
+gen-vel                  = no
+gen-temp                 = 310
+continuation             = yes
