@@ -1,0 +1,9 @@
+COLVAR_0 is the concatenated COLVAR file from 16*3ns OPES simulations with KTICA CVs
+COLVAR_0_sort is the sorted version of COLVAR_0
+COLVAR_1 is the concatenated COLVAR file from 250ns OPES simulation with phi and psi as CVs
+
+log{cv}_{i} files records the average error at each block number for the specific cv from COLVAR_0 or COLVAR_1. This is used to select the number of blocks where the error has converged.
+
+FES_1d.bashrc and FES_2d.bashrc is a bash script for block averaging and FES calculation.
+
+FES_from_Reweighting.py is the script adopted from Dr. Michele Invernizzi at https://github.com/invemichele/masterclass-22-03/blob/master/scripts/FES_from_Reweighting.py. We did a slight modification so that the errorbars are printed to files for further analysis.
