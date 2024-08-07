@@ -123,4 +123,7 @@ class PtypeATPaseGenerator():
             design_method = None, 
             steps = steps)
         return ATPase
-
+    
+    def ClassifyMultistate(self,t=0):
+        xcs = self.protein0.to_XCS()
+        return F.softmax(self.stateconditioner.proclass_models[0](xcs,t),dim=-1)
