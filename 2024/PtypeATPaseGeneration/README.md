@@ -26,6 +26,8 @@ git clone https://github.com/yongwangCPH/papers/tree/main/2024/PtypeATPaseGenera
 ~~~python
 # import package
 from PtypeATPaseGenerator import *
+from chroma import api
+api.register_key("fdb2b9ae7e2744d1ad826cd622dc76dd") # put your token here
 
 #Create a generator
 generator = PtypeATPaseGenerator(protein_path="yourATPase.pdb",
