@@ -1,21 +1,21 @@
-# Generating Multi-state Conformations of Ptype ATPases with a Diffusion Model
 
-Understanding and predicting the diverse conformational states of membrane proteins is essential for elucidating their biological functions. Despite advancements in computational methods, accurately capturing these complex structural changes remains a significant challenge. 
-In this study, we introduce a method for predicting diverse functional states of membrane protein conformations using a diffusion model. Our approach integrates forward and backward diffusion processes, incorporating state classifiers and additional conditioners to control the generation gradient of conformational states. We specifically target the P-type ATPases, a key membrane transporter, for which we curated and expanded a structural dataset. By employing a graph neural network with a custom membrane constraint, our model generates precise structures for P-type ATPases across different functional states. 
-This approach represents a significant step forward in computational structural biology and holds great potential for studying the dynamics of other membrane proteins.
+# Generating Multi-state Conformations of P-type ATPases with a Diffusion Model
+
+Understanding and predicting the various conformational states of membrane proteins is crucial for uncovering their biological functions. Although computational methods have advanced, accurately modeling these complex structural transitions remains challenging.  
+In this study, we present a novel method for predicting diverse functional states of membrane protein conformations using a diffusion model. Our approach combines forward and backward diffusion processes and integrates state classifiers and additional conditioners to modulate the generation gradient of conformational states. We focus on P-type ATPases, a key class of membrane transporters, for which we have curated and expanded a comprehensive structural dataset. Leveraging a graph neural network with a custom membrane constraint, our model generates accurate structures for P-type ATPases across different functional states.  
+This method marks a significant advancement in computational structural biology and offers promising potential for studying the dynamics of other membrane proteins.
 
 # Installation
 
-First, make sure you have all dependencies installed by running 
+To get started, ensure all dependencies are installed by running:
 
 ```
 pip install -r requirements.txt
 ```
-Our model is based on Chroma,
-so you may need to register to obtain an access token to Chroma
-https://chroma-weights.generatebiomedicines.com/
 
+Our model is built on Chroma, so you'll need to register for an access token at [Chroma Weights](https://chroma-weights.generatebiomedicines.com/).
 
+# Note: Due to GitHub's file size limitations (<25MB), the code provided here is incomplete. We plan to share the full code on Zenodo.
 
 # An example of usage
 
