@@ -7,9 +7,9 @@ This approach represents a significant step forward in computational structural 
 # Installation
 
 First, make sure you have all dependencies installed by running 
+~~~conda install -c conda-forge pymol-open-source
 
 ```
-~~~conda install -c conda-forge pymol-open-source
 pip install -r requirements.txt
 ```
 Our model is based on Chroma,
