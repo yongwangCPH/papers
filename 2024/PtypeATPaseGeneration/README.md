@@ -11,6 +11,9 @@ First make sure you have all dependencies installed by running
 ```
 pip install -r requirements.txt
 ```
+# Our model is based on Chroma
+# You may need to register to obtain an access token of Chroma
+https://chroma-weights.generatebiomedicines.com/
 
 Then you can clone the project:
 
