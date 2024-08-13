@@ -6,23 +6,19 @@ This approach represents a significant step forward in computational structural 
 
 # Installation
 
-First make sure you have all dependencies installed by running 
+First, make sure you have all dependencies installed by running 
 
 ```
+~~~conda install -c conda-forge pymol-open-source
 pip install -r requirements.txt
 ```
-Our model is based on Chroma
-You may need to register to obtain an access token of Chroma
+Our model is based on Chroma,
+so you may need to register to obtain an access token to Chroma
 https://chroma-weights.generatebiomedicines.com/
 
 
-Then you can clone the project:
 
-```
-git clone https://github.com/yongwangCPH/papers/tree/main/2024/PtypeATPaseGeneration
-```
-
-# Usage
+# An example of usage
 
 ~~~python
 # import package
