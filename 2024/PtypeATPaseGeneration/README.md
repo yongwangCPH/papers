@@ -25,9 +25,9 @@ git clone https://github.com/yongwangCPH/papers/tree/main/2024/PtypeATPaseGenera
 from PtypeATPaseGenerator import *
 
 #Create a generator
-generator = PtypeATPaseGenerator(protein_path="yourpath/ATPase.pdb",
+generator = PtypeATPaseGenerator(protein_path="yourATPase.pdb",
                                  device = 'cuda',
-                                 state_label = [1,0,0,0]    #Give a specific state for generation,  [E1,E1P,E2P,E2]
+                                 state_label = [1,0,0,0],    #Give a specific state for generation,  [E1,E1P,E2P,E2]
                                  classifier_weight = 0.75,  #The weight of classifier conditioner
                                  classifier_max_norm = 25,
                                  seq_weight = 0.5,  #The weight of sequence conditioner
@@ -44,12 +44,12 @@ generator.GenerateMultistate(
                             steps = 500,  #The number of denoising step
                             trajectory_length=500,
                             full_output = True,  
-                            ):
+                            )
 
 # Reset the state label    
 generator.SetStatelabel([E1,E1P,E2P,E2])
 
 # Reset the weight of conditioners
-generator.SetConditionerWeight(classifier_weight,seq_weight,membrane_weight):
+generator.SetConditionerWeight(classifier_weight,seq_weight,membrane_weight)
 ~~~
 
