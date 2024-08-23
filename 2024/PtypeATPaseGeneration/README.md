@@ -40,13 +40,13 @@ generator = PtypeATPaseGenerator(protein_path="yourATPase.pdb",
 generator.ClassifyMultistate()
 
 # Reset the state label    
-generator.SetStatelabel([E1,E1P,E2P,E2])
+generator.SetStatelabel([0,1.0,0,0]) #Give a specific state for generation,  [E1,E1P,E2P,E2]
 
 # Reset the weight of conditioners
-generator.SetConditionerWeight(classifier_weight,seq_weight,membrane_weight)
+generator.SetConditionerWeight(1.25,0.75,0.1) #Give classifier_weight,seq_weight,membrane_weight respectively
 
 #Generate the specific state for Ptype-ATPase
-generator.GenerateMultistate(
+ATPase = generator.GenerateMultistate(
                             t = 0.625 ,  #The noise scale belong to (0,1)
                             steps = 500,  #The number of denoising step
                             trajectory_length=500,
