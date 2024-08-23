@@ -27,7 +27,7 @@ api.register_key("fdb2b9ae7e2744d1ad826cd622dc76dd") # put your token here
 
 #Create a generator
 generator = PtypeATPaseGenerator(protein_path="yourATPase.pdb",
-                                 device = 'cuda',
+                                 device = 'cpu',
                                  state_label = [1,0,0,0],    #Give a specific state for generation,  [E1,E1P,E2P,E2]
                                  classifier_weight = 0.75,  #The weight of classifier conditioner
                                  classifier_max_norm = 25,
@@ -48,9 +48,7 @@ generator.SetConditionerWeight(1.25,0.75,0.1) #Give classifier_weight,seq_weight
 #Generate the specific state for Ptype-ATPase
 ATPase = generator.GenerateMultistate(
                             t = 0.625 ,  #The noise scale belong to (0,1)
-                            steps = 500,  #The number of denoising step
-                            trajectory_length=500,
-                            full_output = True,  
+                            steps = 500  #The number of denoising step
                             )
 
 # Save ATPase
