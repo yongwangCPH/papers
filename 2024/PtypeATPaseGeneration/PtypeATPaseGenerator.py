@@ -16,14 +16,15 @@ class PtypeATPaseGenerator():
         protein_path,
         state_label = [1,0,0,0],    #[E1,E1P,E2P,E2]
         check_protein = True,  # Check  orientation and atom.Only useful to PtypeATPase
-        device = 'cpu',
+        device = 'cuda:1',
         classifier_model = 'Model/model_weight.pt',
-        classifier_weight = 0.75,
+        classifier_weight = 1,
         classifier_max_norm = 25,
         seq_weight = 0.5,  
         membrane_constraintor = True,
         expect_rmsd = 4,
-        membrane_weight = 0.1  #recommend less than 0.25
+        membrane_weight = 0.1,  #recommend less than 0.25
+        debug = False
      ):
         self.device = device
         self.check_protein = check_protein
@@ -32,6 +33,7 @@ class PtypeATPaseGenerator():
         print("Initial Chroma")
         _chroma = Chroma(device = device)   
         self.chroma = _chroma
+        self.chroma.eval()
         seq_model = _chroma.design_network
         back_model = _chroma.backbone_network
         
@@ -56,7 +58,7 @@ class PtypeATPaseGenerator():
             weight = classifier_weight,
             max_norm =classifier_max_norm,
             renormalize_grad = False,
-            debug = False)
+            debug = debug)
         
         self.seqconditioner = conditioners.SubsequenceConditioner(protein = self.protein0 ,design_model=seq_model,weight = seq_weight) 
         
@@ -74,10 +76,12 @@ class PtypeATPaseGenerator():
     
     def CheckProtein(self,prot_path):
         dir_path = os.path.dirname(prot_path)
+        if dir_path == "" :
+            dir_path = "."
         base_name = os.path.basename(prot_path)
         base_name = "." + base_name
-        new_prot_path = dir_path + '//' + base_name
-        ref_path = 'Dataset/PtypeATPasePDBs_Enhanced/1iwo.pdb'
+        new_prot_path = dir_path + '/' + base_name
+        ref_path = '1iwo.pdb'
         cmd.load(prot_path,'prot')
         cmd.load(ref_path,'ref')
         cmd.remove("hetatm")
@@ -102,17 +106,15 @@ class PtypeATPaseGenerator():
         self,
         t = 0.625 ,
         steps = 500,
-        trajectory_length=500,
-        full_output = True,
-    ):
+        ):
         
         if self.membrane_constraintor:
             self.composeconditioner = conditioners.ComposedConditioner([self.stateconditioner,self.seqconditioner,self.constraintor])
         else:
             self.composeconditioner = conditioners.ComposedConditioner([self.stateconditioner,self.seqconditioner])
+        self.chroma.eval()
         ATPase = self.chroma.sample( 
-            trajectory_length=trajectory_length,
-            full_output = full_output, 
+            full_output = False,
             initialize_noise=True, 
             protein_init = self.protein0, 
             conditioner = self.composeconditioner, 
@@ -124,6 +126,10 @@ class PtypeATPaseGenerator():
             steps = steps)
         return ATPase
     
-    def ClassifyMultistate(self,t=0):
-        xcs = self.protein0.to_XCS()
+    def ClassifyMultistate(self,t=0,protein = None):
+        if protein:
+            p = Protein(protein,device = self.stateconditioner.device)
+        else:
+            p = self.protein0
+        xcs = p.to_XCS()
         return F.softmax(self.stateconditioner.proclass_models[0](xcs,t),dim=-1)
